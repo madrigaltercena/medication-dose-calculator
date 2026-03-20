@@ -1,16 +1,15 @@
 import { useState, useMemo } from 'react'
 
 function getDefaultTime() {
-  const now = new Date()
-  return `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`
+  return '08:00'
 }
 
 export function useMedicationCalculation() {
   const [volume, setVolume] = useState(10)
   const [phase1Rate, setPhase1Rate] = useState('')
-  const [phase1Hours, setPhase1Hours] = useState('')
+  const [phase1Hours, setPhase1Hours] = useState('16')
   const [phase2Rate, setPhase2Rate] = useState('')
-  const [phase2Hours, setPhase2Hours] = useState('')
+  const [phase2Hours, setPhase2Hours] = useState('8')
   const [startTime, setStartTime] = useState(getDefaultTime)
 
   const inputs = { volume, phase1Rate, phase1Hours, phase2Rate, phase2Hours, startTime }
@@ -104,14 +103,17 @@ export function useMedicationCalculation() {
     // Calculate end time in minutes
     const endTotalMins = startTotalMins + Math.round(totalHours * 60)
     const endDayOffset = Math.floor(endTotalMins / (24 * 60))
-    const endHour = Math.floor((endTotalMins % (24 * 60)) / 60)
-    const endMin = Math.round(endTotalMins % 60)
+    const normalizedEndMins = endTotalMins - endDayOffset * 24 * 60
+    const endHour = Math.floor(normalizedEndMins / 60)
+    const endMin = Math.round(normalizedEndMins % 60)
 
     const endTimeStr = `${String(endHour).padStart(2, '0')}:${String(endMin).padStart(2, '0')}`
     const endDayStr = endDayOffset > 0 ? ` (+${endDayOffset} dia${endDayOffset > 1 ? 's' : ''})` : ''
 
-    // Calculate deficit when total is less than one cycle
-    const deficit = !isOver24Hours ? totalPerCycle - totalHours * (totalPerCycle / cycleDuration) : 0
+    // Deficit: amount needed to reach one full cycle (totalPerCycle)
+    // When totalHours < cycleDuration, we couldn't complete a cycle
+    // Deficit = totalPerCycle - volume (what we need but don't have)
+    const deficit = !isOver24Hours ? Math.max(0, totalPerCycle - v) : 0
 
     return {
       volume: v,

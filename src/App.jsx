@@ -40,16 +40,13 @@ function App() {
                 onChange={setters.setVolume}
                 placeholder="10"
               />
-              <div className="form-group">
-                <label htmlFor="startTime">Hora de início da toma</label>
-                <input
-                  id="startTime"
-                  type="time"
-                  value={inputs.startTime}
-                  onChange={(e) => setters.setStartTime(e.target.value)}
-                  className="time-input"
-                />
-              </div>
+              <FormInput
+                id="startTime"
+                label="Hora de início da toma"
+                type="time"
+                value={inputs.startTime}
+                onChange={setters.setStartTime}
+              />
             </div>
           </section>
 

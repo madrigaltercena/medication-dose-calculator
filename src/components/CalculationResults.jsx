@@ -3,7 +3,7 @@ import './CalculationResults.css'
 export function CalculationResults({ result }) {
   if (!result) return null
 
-  const { totalHours, isOver24Hours, endTimeStr, endDayStr, deficit } = result
+  const { totalHours, isOver24Hours, endTimeStr, endDayStr, endDayOffset, deficit } = result
 
   return (
     <div className="results" role="region" aria-label="Resultados do cálculo">
@@ -17,9 +17,13 @@ export function CalculationResults({ result }) {
             🕐 Acaba às {endTimeStr}{endDayStr}
           </p>
         )}
-        {!isOver24Hours && (
+        {endDayOffset === 0 ? (
           <p className="end-time">
             🕐 Acaba às {endTimeStr} (mesmo dia)
+          </p>
+        ) : (
+          <p className="end-time">
+            🕐 Acaba às {endTimeStr}{endDayStr}
           </p>
         )}
       </div>
@@ -89,7 +93,7 @@ export function CalculationResults({ result }) {
                 <p className="formula">Fase 1: {result.remainingPhase1Hours.toFixed(2)} h ({result.remainingPhase1Ml.toFixed(3)} ml)</p>
               )}
               <p className="deficit-note">
-                Faltam <strong>{deficit.toFixed(3)} ml</strong> para completar um ciclo de 24h
+                Faltam <strong>{deficit.toFixed(3)} ml</strong> para completar o próximo ciclo de 24h
               </p>
             </div>
           </>
