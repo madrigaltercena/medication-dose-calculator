@@ -28,7 +28,7 @@ function App() {
         </header>
 
         <form onSubmit={handleSubmit} noValidate aria-label="Formulário de cálculo de medicação">
-          <section aria-labelledby="volume-section">
+          <PhaseSection title="Dados da medicação">
             <div className="phase-inputs">
               <FormInput
                 id="volume"
@@ -48,7 +48,7 @@ function App() {
                 onChange={setters.setStartTime}
               />
             </div>
-          </section>
+          </PhaseSection>
 
           <PhaseSection title="Fase 1">
             <div className="phase-inputs">
