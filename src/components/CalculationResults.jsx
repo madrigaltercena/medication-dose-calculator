@@ -12,11 +12,6 @@ export function CalculationResults({ result }) {
       <div className="result-highlight">
         <p>A sua medicação vai durar aproximadamente</p>
         <p className="total-hours"><strong>{totalHours.toFixed(2)} horas</strong></p>
-        {isOver24Hours && (
-          <p className="end-time">
-            🕐 Acaba às {endTimeStr}{endDayStr}
-          </p>
-        )}
         {endDayOffset === 0 ? (
           <p className="end-time">
             🕐 Acaba às {endTimeStr} (mesmo dia)

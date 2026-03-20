@@ -29,7 +29,7 @@ function App() {
 
         <form onSubmit={handleSubmit} noValidate aria-label="Formulário de cálculo de medicação">
           <section aria-labelledby="volume-section">
-            <div className="volume-row">
+            <div className="phase-inputs">
               <FormInput
                 id="volume"
                 label="Quantidade de medicamento disponível (ml)"
