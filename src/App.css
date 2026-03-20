@@ -27,6 +27,10 @@ body {
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
 }
 
+header {
+  margin-bottom: 24px;
+}
+
 h1 {
   color: #333;
   margin-bottom: 8px;
@@ -38,35 +42,7 @@ h1 {
 .subtitle {
   color: #666;
   text-align: center;
-  margin-bottom: 30px;
   font-size: 16px;
-}
-
-.form-group {
-  margin-bottom: 16px;
-  flex: 1;
-}
-
-.form-group label {
-  display: block;
-  margin-bottom: 6px;
-  color: #444;
-  font-weight: 600;
-  font-size: 14px;
-}
-
-.form-group input {
-  width: 100%;
-  padding: 12px 16px;
-  border: 2px solid #e0e0e0;
-  border-radius: 10px;
-  font-size: 16px;
-  transition: border-color 0.2s;
-}
-
-.form-group input:focus {
-  outline: none;
-  border-color: #667eea;
 }
 
 .phase {
@@ -77,20 +53,16 @@ h1 {
   border: 1px solid #e8ecf4;
 }
 
-.phase h2 {
+.phase-legend {
   color: #555;
   font-size: 16px;
-  margin-bottom: 12px;
   font-weight: 700;
+  padding: 0 4px;
 }
 
 .phase-inputs {
   display: flex;
   gap: 16px;
-}
-
-.phase-inputs .form-group {
-  flex: 1;
 }
 
 .buttons {
@@ -107,15 +79,20 @@ button {
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
-  transition: transform 0.1s, box-shadow 0.2s;
+  transition: transform 0.1s, box-shadow 0.2s, opacity 0.2s;
 }
 
-button:hover {
+button:hover:not(:disabled) {
   transform: translateY(-1px);
 }
 
-button:active {
+button:active:not(:disabled) {
   transform: translateY(0);
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .btn-primary {
@@ -124,7 +101,7 @@ button:active {
   box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
 }
 
-.btn-primary:hover {
+.btn-primary:hover:not(:disabled) {
   box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
 }
 
@@ -133,92 +110,8 @@ button:active {
   color: #555;
 }
 
-.btn-secondary:hover {
+.btn-secondary:hover:not(:disabled) {
   background: #e4e4e4;
-}
-
-.results {
-  margin-top: 30px;
-  padding-top: 30px;
-  border-top: 2px solid #eee;
-}
-
-.results h2 {
-  color: #333;
-  margin-bottom: 16px;
-  font-size: 20px;
-}
-
-.result-highlight {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  padding: 24px;
-  border-radius: 12px;
-  text-align: center;
-  margin-bottom: 24px;
-}
-
-.result-highlight p {
-  font-size: 18px;
-  margin-bottom: 4px;
-}
-
-.result-highlight strong {
-  font-size: 28px;
-  display: block;
-  margin: 8px 0;
-}
-
-.result-highlight .cycles {
-  font-size: 14px;
-  opacity: 0.9;
-}
-
-.calculations h3 {
-  color: #555;
-  font-size: 14px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-bottom: 16px;
-}
-
-.calc-step {
-  background: #f8f9ff;
-  padding: 14px 18px;
-  border-radius: 10px;
-  margin-bottom: 10px;
-  border-left: 4px solid #667eea;
-}
-
-.calc-step p {
-  color: #555;
-  font-size: 15px;
-  margin-bottom: 4px;
-}
-
-.calc-step strong {
-  color: #333;
-}
-
-.formula {
-  font-family: 'Courier New', monospace;
-  background: #f0f4ff;
-  padding: 8px 12px;
-  border-radius: 6px;
-  margin-top: 6px;
-  color: #444;
-  font-size: 14px;
-}
-
-.calc-step.total {
-  background: #e8ecf4;
-  border-left-color: #764ba2;
-}
-
-.calc-step.total .formula {
-  font-size: 15px;
-  font-weight: 600;
-  color: #333;
 }
 
 @media (max-width: 480px) {
@@ -229,9 +122,5 @@ button:active {
   .phase-inputs {
     flex-direction: column;
     gap: 0;
-  }
-
-  .result-highlight strong {
-    font-size: 22px;
   }
 }

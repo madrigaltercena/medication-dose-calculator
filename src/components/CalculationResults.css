@@ -1,0 +1,87 @@
+.results {
+  margin-top: 30px;
+  padding-top: 30px;
+  border-top: 2px solid #eee;
+}
+
+.results h2 {
+  color: #333;
+  margin-bottom: 16px;
+  font-size: 20px;
+}
+
+.result-highlight {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 24px;
+  border-radius: 12px;
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.result-highlight p {
+  font-size: 18px;
+  margin-bottom: 4px;
+}
+
+.result-highlight .total-hours {
+  font-size: 18px;
+  margin: 8px 0;
+}
+
+.result-highlight .total-hours strong {
+  font-size: 28px;
+  display: block;
+}
+
+.result-highlight .cycles {
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+.calculations h3 {
+  color: #555;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 16px;
+}
+
+.calc-step {
+  background: #f8f9ff;
+  padding: 14px 18px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  border-left: 4px solid #667eea;
+}
+
+.calc-step p {
+  color: #555;
+  font-size: 15px;
+  margin-bottom: 4px;
+}
+
+.calc-step strong {
+  color: #333;
+}
+
+.formula {
+  font-family: 'Courier New', monospace;
+  background: #f0f4ff;
+  padding: 8px 12px;
+  border-radius: 6px;
+  margin-top: 6px;
+  color: #444;
+  font-size: 14px;
+}
+
+.calc-step.total {
+  background: #e8ecf4;
+  border-left-color: #764ba2;
+}
+
+.calc-step.total .formula {
+  font-size: 15px;
+  font-weight: 600;
+  color: #333;
+}
