@@ -29,16 +29,28 @@ function App() {
 
         <form onSubmit={handleSubmit} noValidate aria-label="Formulário de cálculo de medicação">
           <section aria-labelledby="volume-section">
-            <FormInput
-              id="volume"
-              label="Quantidade de medicamento disponível (ml)"
-              type="number"
-              step="0.01"
-              min="0"
-              value={inputs.volume}
-              onChange={setters.setVolume}
-              placeholder="10"
-            />
+            <div className="volume-row">
+              <FormInput
+                id="volume"
+                label="Quantidade de medicamento disponível (ml)"
+                type="number"
+                step="0.01"
+                min="0"
+                value={inputs.volume}
+                onChange={setters.setVolume}
+                placeholder="10"
+              />
+              <div className="form-group">
+                <label htmlFor="startTime">Hora de início da toma</label>
+                <input
+                  id="startTime"
+                  type="time"
+                  value={inputs.startTime}
+                  onChange={(e) => setters.setStartTime(e.target.value)}
+                  className="time-input"
+                />
+              </div>
+            </div>
           </section>
 
           <PhaseSection title="Fase 1">

@@ -1,14 +1,20 @@
 import { useState, useMemo } from 'react'
 
+function getDefaultTime() {
+  const now = new Date()
+  return `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`
+}
+
 export function useMedicationCalculation() {
   const [volume, setVolume] = useState(10)
   const [phase1Rate, setPhase1Rate] = useState('')
   const [phase1Hours, setPhase1Hours] = useState('')
   const [phase2Rate, setPhase2Rate] = useState('')
   const [phase2Hours, setPhase2Hours] = useState('')
+  const [startTime, setStartTime] = useState(getDefaultTime)
 
-  const inputs = { volume, phase1Rate, phase1Hours, phase2Rate, phase2Hours }
-  const setters = { setVolume, setPhase1Rate, setPhase1Hours, setPhase2Rate, setPhase2Hours }
+  const inputs = { volume, phase1Rate, phase1Hours, phase2Rate, phase2Hours, startTime }
+  const setters = { setVolume, setPhase1Rate, setPhase1Hours, setPhase2Rate, setPhase2Hours, setStartTime }
 
   const validation = useMemo(() => {
     const v = parseFloat(volume)
@@ -87,6 +93,26 @@ export function useMedicationCalculation() {
       (remainingPhase1Hours > 0 ? remainingPhase1Hours : 0) +
       (remainingPhase2Hours > 0 ? remainingPhase2Hours : 0)
 
+    // Calculate end time
+    const cycleDuration = h1 + h2
+    const isOver24Hours = totalHours >= 24
+
+    // Parse start time
+    const [startHour, startMin] = startTime.split(':').map(Number)
+    const startTotalMins = startHour * 60 + startMin
+
+    // Calculate end time in minutes
+    const endTotalMins = startTotalMins + Math.round(totalHours * 60)
+    const endDayOffset = Math.floor(endTotalMins / (24 * 60))
+    const endHour = Math.floor((endTotalMins % (24 * 60)) / 60)
+    const endMin = Math.round(endTotalMins % 60)
+
+    const endTimeStr = `${String(endHour).padStart(2, '0')}:${String(endMin).padStart(2, '0')}`
+    const endDayStr = endDayOffset > 0 ? ` (+${endDayOffset} dia${endDayOffset > 1 ? 's' : ''})` : ''
+
+    // Calculate deficit when total is less than one cycle
+    const deficit = !isOver24Hours ? totalPerCycle - totalHours * (totalPerCycle / cycleDuration) : 0
+
     return {
       volume: v,
       r1, h1,
@@ -101,8 +127,12 @@ export function useMedicationCalculation() {
       remainingPhase1Ml,
       remainingPhase2Ml,
       totalHours,
+      isOver24Hours,
+      endTimeStr,
+      endDayStr,
+      deficit,
     }
-  }, [volume, phase1Rate, phase1Hours, phase2Rate, phase2Hours])
+  }, [volume, phase1Rate, phase1Hours, phase2Rate, phase2Hours, startTime])
 
   const reset = () => {
     setVolume(10)

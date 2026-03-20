@@ -65,6 +65,31 @@ h1 {
   gap: 16px;
 }
 
+.volume-row {
+  display: flex;
+  gap: 16px;
+}
+
+.volume-row .form-group {
+  flex: 1;
+}
+
+.time-input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  font-size: 16px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  background: white;
+}
+
+.time-input:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.15);
+}
+
 .buttons {
   display: flex;
   gap: 12px;
@@ -120,6 +145,11 @@ button:disabled {
   }
 
   .phase-inputs {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .volume-row {
     flex-direction: column;
     gap: 0;
   }

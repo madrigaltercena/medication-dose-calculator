@@ -85,3 +85,17 @@
   font-weight: 600;
   color: #333;
 }
+
+.deficit-note {
+  margin-top: 8px;
+  padding: 8px 12px;
+  background: #fff3e0;
+  border-radius: 6px;
+  color: #e65100;
+  font-size: 13px;
+  border-left: 3px solid #ff9800;
+}
+
+.deficit-note strong {
+  color: #e65100;
+}
