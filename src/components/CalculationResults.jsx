@@ -93,7 +93,10 @@ export function CalculationResults({ result }) {
                 <p className="formula">Fase 1: {result.remainingPhase1Hours.toFixed(2)} h ({result.remainingPhase1Ml.toFixed(3)} ml)</p>
               )}
               <p className="deficit-note">
-                Faltam <strong>{deficit.toFixed(3)} ml</strong> para completar o próximo ciclo de 24h
+                {isOver24Hours
+                  ? <>Faltam <strong>{deficit.toFixed(3)} ml</strong> para completar o próximo ciclo de 24h</>
+                  : <>Faltam <strong>{deficit.toFixed(3)} ml</strong> para completar o ciclo de 24h</>
+                }
               </p>
             </div>
           </>
