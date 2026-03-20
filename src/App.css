@@ -124,4 +124,9 @@ button:disabled {
     flex-direction: column;
     gap: 0;
   }
+
+  .phase-inputs .form-group {
+    flex: none;
+    width: 100%;
+  }
 }
