@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react'
 
 export function useEquivalenceCalculation() {
   const [equivalentesDaLevodopa, setEquivalentesDaLevodopa] = useState('')
-  const [horasAcordado, setHorasAcordado] = useState('')
+  const [horasAcordado, setHorasAcordado] = useState('16')
 
   const inputs = { equivalentesDaLevodopa, horasAcordado }
   const setters = { setEquivalentesDaLevodopa, setHorasAcordado }
@@ -56,7 +56,7 @@ export function useEquivalenceCalculation() {
 
   const reset = () => {
     setEquivalentesDaLevodopa('')
-    setHorasAcordado('')
+    setHorasAcordado('16')
   }
 
   return { inputs, setters, validation, result, reset }
