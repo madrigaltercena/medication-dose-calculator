@@ -27,7 +27,13 @@ export function FormInput({
         value={value}
         defaultValue={defaultValue}
         placeholder={placeholder}
-        onChange={(e) => onChange(e.target.value === '' ? '' : parseFloat(e.target.value))}
+        onChange={(e) => {
+          const nextValue = type === 'number'
+            ? (e.target.value === '' ? '' : parseFloat(e.target.value))
+            : e.target.value
+
+          onChange(nextValue)
+        }}
         className={error ? 'input-error' : ''}
         aria-invalid={error ? 'true' : 'false'}
         aria-describedby={error ? `${id}-error` : undefined}

@@ -93,7 +93,6 @@ export function useMedicationCalculation() {
       (remainingPhase2Hours > 0 ? remainingPhase2Hours : 0)
 
     // Calculate end time
-    const cycleDuration = h1 + h2
     const isOver24Hours = totalHours >= 24
 
     // Parse start time
@@ -131,6 +130,7 @@ export function useMedicationCalculation() {
       totalHours,
       isOver24Hours,
       endTimeStr,
+      endDayOffset,
       endDayStr,
       deficit,
     }
