@@ -187,12 +187,12 @@ function App() {
 
   const tabContent = {
     duration: {
-      label: 'Cálculo da duração',
+      label: 'Duração',
       subtitle: 'Quantas horas vai durar a sua medicação?',
     },
     equivalence: {
-      label: 'Cálculo da equivalência',
-      subtitle: 'Calcule a equivalência final em ml/h.',
+      label: 'Taxa base',
+      subtitle: 'Calcule a taxa base em ml/h.',
     },
   }
 
