@@ -1,19 +1,14 @@
 import { useState, useMemo } from 'react'
 
-function getDefaultTime() {
-  return '08:00'
-}
-
 export function useMedicationCalculation() {
   const [volume, setVolume] = useState(10)
   const [phase1Rate, setPhase1Rate] = useState('')
   const [phase1Hours, setPhase1Hours] = useState('16')
   const [phase2Rate, setPhase2Rate] = useState('')
   const [phase2Hours, setPhase2Hours] = useState('8')
-  const [startTime, setStartTime] = useState(getDefaultTime)
 
-  const inputs = { volume, phase1Rate, phase1Hours, phase2Rate, phase2Hours, startTime }
-  const setters = { setVolume, setPhase1Rate, setPhase1Hours, setPhase2Rate, setPhase2Hours, setStartTime }
+  const inputs = { volume, phase1Rate, phase1Hours, phase2Rate, phase2Hours }
+  const setters = { setVolume, setPhase1Rate, setPhase1Hours, setPhase2Rate, setPhase2Hours }
 
   const validation = useMemo(() => {
     const v = parseFloat(volume)
@@ -92,27 +87,7 @@ export function useMedicationCalculation() {
       (remainingPhase1Hours > 0 ? remainingPhase1Hours : 0) +
       (remainingPhase2Hours > 0 ? remainingPhase2Hours : 0)
 
-    // Calculate end time
     const isOver24Hours = totalHours >= 24
-
-    // Parse start time
-    const [startHour, startMin] = startTime.split(':').map(Number)
-    const startTotalMins = startHour * 60 + startMin
-
-    // Calculate end time in minutes
-    const endTotalMins = startTotalMins + Math.round(totalHours * 60)
-    const endDayOffset = Math.floor(endTotalMins / (24 * 60))
-    const normalizedEndMins = endTotalMins - endDayOffset * 24 * 60
-    const endHour = Math.floor(normalizedEndMins / 60)
-    const endMin = Math.round(normalizedEndMins % 60)
-
-    const endTimeStr = `${String(endHour).padStart(2, '0')}:${String(endMin).padStart(2, '0')}`
-    const endDayStr = endDayOffset > 0 ? ` (+${endDayOffset} dia${endDayOffset > 1 ? 's' : ''})` : ''
-
-    // Deficit: amount needed to reach one full cycle (totalPerCycle)
-    // When totalHours < cycleDuration, we couldn't complete a cycle
-    // Deficit = totalPerCycle - volume (what we need but don't have)
-    const deficit = !isOver24Hours ? Math.max(0, totalPerCycle - v) : 0
 
     return {
       volume: v,
@@ -129,12 +104,8 @@ export function useMedicationCalculation() {
       remainingPhase2Ml,
       totalHours,
       isOver24Hours,
-      endTimeStr,
-      endDayOffset,
-      endDayStr,
-      deficit,
     }
-  }, [volume, phase1Rate, phase1Hours, phase2Rate, phase2Hours, startTime])
+  }, [volume, phase1Rate, phase1Hours, phase2Rate, phase2Hours])
 
   const reset = () => {
     setVolume(10)

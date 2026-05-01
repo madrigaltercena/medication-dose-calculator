@@ -35,13 +35,6 @@ function DurationCalculator({ inputs, setters, validation, result, reset }) {
               onChange={setters.setVolume}
               placeholder="10"
             />
-            <FormInput
-              id="startTime"
-              label="Hora de início da toma"
-              type="time"
-              value={inputs.startTime}
-              onChange={setters.setStartTime}
-            />
           </div>
         </PhaseSection>
 
